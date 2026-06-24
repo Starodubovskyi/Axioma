@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark-900 text-white antialiased;
+  }
+
+  ::selection {
+    @apply bg-axiom-500/40 text-white;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+  }
+
+  .glass-strong {
+    @apply bg-white/[0.06] backdrop-blur-2xl border border-white/[0.12];
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-axiom-300 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+           bg-gradient-to-r from-axiom-500 to-purple-600 text-white font-semibold
+           hover:from-axiom-400 hover:to-purple-500 transition-all duration-300
+           shadow-lg shadow-axiom-500/25 hover:shadow-axiom-500/40 hover:scale-[1.02]
+           active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+           glass text-white font-medium hover:bg-white/[0.08] transition-all duration-300
+           hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #4338ca;
+  border-radius: 3px;
+}
