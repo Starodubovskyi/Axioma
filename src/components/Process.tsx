@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
-import { processSteps } from '../data/content'
+import { processStepIds } from '../data/content'
+import { useLanguage } from '../i18n/context'
 
 export default function Process() {
+  const { t } = useLanguage()
+
   return (
     <section id="process" className="section-padding relative">
       <div className="container-custom">
@@ -9,42 +12,39 @@ export default function Process() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-12 sm:mb-16"
         >
-          <span className="text-axiom-400 text-sm font-semibold tracking-wider uppercase mb-4 block">
-            Процес
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-balance">
-            Як ми{' '}
-            <span className="gradient-text">працюємо</span>
+          <span className="section-label">{t.process.label}</span>
+          <h2 className="section-title">
+            {t.process.title}{' '}
+            <span className="gradient-text">{t.process.titleHighlight}</span>
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">
-            Прозорий процес від ідеї до запуску
-          </p>
+          <p className="section-desc">{t.process.desc}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-          {processSteps.map((step, i) => (
-            <motion.div
-              key={step.step}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="relative group"
-            >
-              {i < processSteps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-[calc(100%+12px)] w-[calc(100%-24px)] h-px bg-gradient-to-r from-axiom-500/50 to-transparent" />
-              )}
-              <div className="glass rounded-2xl p-6 sm:p-8 h-full hover:bg-white/[0.05] transition-colors">
-                <span className="font-display text-4xl font-bold gradient-text mb-4 block">
-                  {step.step}
-                </span>
-                <h3 className="font-display text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {processStepIds.map((stepId, i) => {
+            const step = t.process.steps[i]
+            return (
+              <motion.div
+                key={stepId}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ delay: i * 0.08 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative"
+              >
+                <div className="glass rounded-2xl p-5 sm:p-7 h-full card-hover">
+                  <span className="font-display text-3xl sm:text-4xl font-bold gradient-text mb-3 sm:mb-4 block">
+                    {stepId}
+                  </span>
+                <h3 className="font-display text-xl font-semibold mb-3 text-white">{step.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{step.description}</p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

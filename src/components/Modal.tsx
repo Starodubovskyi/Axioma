@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
+import { useLanguage } from '../i18n/context'
 
 interface ModalProps {
   isOpen: boolean
@@ -11,6 +12,7 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, title, children, size = 'lg' }: ModalProps) {
+  const { t } = useLanguage()
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -45,7 +47,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'lg' }:
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-dark-900/70 backdrop-blur-md"
             onClick={onClose}
           />
           <motion.div
@@ -62,7 +64,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'lg' }:
                   <button
                     onClick={onClose}
                     className="p-2 rounded-xl hover:bg-white/10 transition-colors"
-                    aria-label="Закрити"
+                    aria-label={t.modal.close}
                   >
                     <X size={20} />
                   </button>
